@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KimBel's bakery</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <!-- Standaard favicon voor moderne browsers -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+    <!-- Fallback voor oudere browsers -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Javascript -->
+    <script src="js/hamburger-menu.js" defer></script>
+    <script src="js/mail.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- Navigatiebalk -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="../images/icon-transp.png" alt="KimBel's bakery icon" class="icon">
+            KimBel's <span>bakery</span>
+        </a>
+
+        <!-- Hamburger knop -->
+        <button class="hamburger" id="hamburger" aria-label="Menu openen/sluiten">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Menu items -->
+    <div class="nav-menu" id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="#">Bestellen</a>
+        <a href="about.html">Over mij</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+
+    <!-- Contact sectie -->
+    <main>
+        <section class="contact-section">
+            <div class="container">
+                
+                <h1>Contact</h1>
+                <p class="subtitle">Heb je vragen, een speciale bestelling of wil je iets anders weten? Ik hoor het
+                    graag!</p>
+
+                <div class="contact-form">
+                    <h2>Stuur een bericht</h2>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Naam</label>
+                                <input type="text" id="name" placeholder="Jouw naam" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" placeholder="Jouw e-mail" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Onderwerp *</label>
+                            <select id="subject" required>
+                                <option value="">Kies een onderwerp...</option>
+                                <option value="bestelling">Bestelling</option>
+                                <option value="trouwtaart">Taart</option>
+                                <option value="allergie">Allergie</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="overig">Overig</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Bericht *</label>
+                            <textarea id="message" placeholder="Waarmee kunnen we je helpen?" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Verstuur bericht</button>
+                    </form>
+                </div>
+
+
+
+                <!-- ===== CONTACTGEGEVENS ===== -->
+                <div class="contact-info">
+                    <h2>Contactgegevens</h2>
+
+                    <div class="info-item">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                stroke="#c87a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0z"
+                                    fill="#c87a4f"></path>
+                                <circle cx="12" cy="10" r="3" fill="white"></circle>
+                            </svg>
+                        </span>
+                        <div class="text">
+                            <strong>Adres</strong>
+                            Griend 24 25<br>
+                            8225RZ Lelystad
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                stroke="#c87a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                                    fill="#c87a4f"></path>
+                            </svg>
+                        </span>
+                        <div class="text">
+                            <strong>Telefoon</strong>
+                            <a href="tel:+31617828022">06 178 280 22</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                stroke="#c87a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="16" x="2" y="4" rx="2" fill="#c87a4f"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" fill="white"></path>
+                            </svg>
+                        </span>
+                        <div class="text">
+                            <strong>E-mail</strong>
+                            <a href="mailto:efrilb@gmail.com">efrilb@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                stroke="#c87a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" fill="#c87a4f"></path>
+                            </svg>
+                        </span>
+                        <div class="text">
+                            <strong>WhatsApp</strong>
+                            <a href="https://wa.me/31617828022">06 178280 22</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== GOOGLE MAPS ===== -->
+                <div class="map-section">
+                    <iframe src="https://www.google.com/maps?q=Griend+24+25+8225RZ+Lelystad&output=embed"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+</body>
+
+<footer>
+    <div class="container">
+        <p>© 2026 <a href="#">KimBel's bakery</a> — Gebakken met passie</p>
+    </div>
+</footer>
+
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Bakkerij De Zoete Zonde</title>
+    <style>
+        /* ===== ALGEMENE STIJLEN ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fdf8f3;
+            color: #3d2c1e;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER / NAVIGATIE ===== */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #c87a4f;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #3d2c1e;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #3d2c1e;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #c87a4f;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-section {
+            padding: 60px 0 80px;
+        }
+
+        .contact-section h1 {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #3d2c1e;
+        }
+
+        .contact-section .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 50px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        /* ===== CONTACT FORM ===== */
+        .contact-form h2,
+        .contact-info h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #c87a4f;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e8ddd5;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            background: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #c87a4f;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn-submit {
+            background: #c87a4f;
+            color: #fff;
+            border: none;
+            padding: 14px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: #b06a42;
+            transform: scale(1.01);
+        }
+
+        /* ===== CONTACT INFO ===== */
+        .contact-info p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-item .icon {
+            font-size: 24px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .info-item .text {
+            font-size: 16px;
+        }
+
+        .info-item .text strong {
+            display: block;
+            color: #3d2c1e;
+            font-weight: 600;
+        }
+
+        .opening-hours {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            margin-top: 30px;
+        }
+
+        .opening-hours h3 {
+            color: #c87a4f;
+            margin-bottom: 10px;
+        }
+
+        .opening-hours .day {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #f0ebe6;
+        }
+
+        .opening-hours .day:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== KAART / MAP ===== */
+        .map-section {
+            margin-top: 60px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .map-section iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            display: block;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #3d2c1e;
+            color: #f0ebe6;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 20px;
+        }
+
+        footer a {
+            color: #c87a4f;
+            text-decoration: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section h1 {
+                font-size: 30px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="container header-inner">
+        <a href="#" class="logo">🍞 <span>De</span>ZoeteZonde</a>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Assortiment</a></li>
+                <li><a href="#">Over ons</a></li>
+                <li><a href="#" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section class="contact-section">
+    <div class="container">
+
+        <h1>Neem contact op</h1>
+        <p class="subtitle">Heb je vragen, een speciale bestelling of gewoon zin in een praatje? Wij horen het graag!</p>
+
+        <div class="contact-grid">
+
+            <!-- ===== FORMULIER ===== -->
+            <div class="contact-form">
+                <h2>📬 Stuur ons een bericht</h2>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Naam *</label>
+                            <input type="text" id="name" placeholder="Jouw naam" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" placeholder="Jouw e-mail" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Onderwerp</label>
+                        <select id="subject">
+                            <option value="">Kies een onderwerp...</option>
+                            <option value="bestelling">Bestelling</option>
+                            <option value="trouwtaart">Trouwtaart</option>
+                            <option value="allergie">Allergie / Dieetwens</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="overig">Overig</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Bericht *</label>
+                        <textarea id="message" placeholder="Waarmee kunnen we je helpen?" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">✉️ Verstuur bericht</button>
+                </form>
+            </div>
+
+            <!-- ===== CONTACTGEGEVENS ===== -->
+            <div class="contact-info">
+                <h2>📍 Onze bakkerij</h2>
+                <p>Kom langs, bel of app ons — we bakken met heel veel liefde!</p>
+
+                <div class="info-item">
+                    <span class="icon">🏠</span>
+                    <div class="text">
+                        <strong>Adres</strong>
+                        Broodstraat 12<br>
+                        1012 AB Amsterdam
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="icon">📞</span>
+                    <div class="text">
+                        <strong>Telefoon</strong>
+                        <a href="tel:+31201234567">020 123 4567</a>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="icon">📧</span>
+                    <div class="text">
+                        <strong>E-mail</strong>
+                        <a href="mailto:info@dezoetezonde.nl">info@dezoetezonde.nl</a>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="icon">📱</span>
+                    <div class="text">
+                        <strong>WhatsApp</strong>
+                        <a href="https://wa.me/31612345678">06 12345678</a>
+                    </div>
+                </div>
+
+                <!-- OPENINGSTIJDEN -->
+                <div class="opening-hours">
+                    <h3>🕐 Openingstijden</h3>
+                    <div class="day"><span>Maandag</span><span>Gesloten</span></div>
+                    <div class="day"><span>Dinsdag – Vrijdag</span><span>08:00 – 18:00</span></div>
+                    <div class="day"><span>Zaterdag</span><span>08:00 – 17:00</span></div>
+                    <div class="day"><span>Zondag</span><span>09:00 – 15:00</span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== GOOGLE MAPS ===== -->
+        <div class="map-section">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2436.5362064751786!2d4.895216!3d52.370216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c609c1c2e3a6b7%3A0x3f6a8b2d4f5e8c9a!2sAmsterdam!5e0!3m2!1snl!2snl!4v1700000000000" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <p>© 2026 <a href="#">De Zoete Zonde</a> — Gebakken met passie 🥐</p>
+    </div>
+</footer>
+
+<!-- ===== EXTERNAL SCRIPT (voorbeeld) ===== -->
+<script>
+    // Dit is het externe script (normaal in een apart .js bestand)
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contactForm');
+
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Simpele feedback
+                const naam = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const bericht = document.getElementById('message').value.trim();
+
+                if (naam && email && bericht) {
+                    alert('✅ Bedankt voor je bericht, ' + naam + '! We nemen zo snel mogelijk contact met je op.');
+                    form.reset();
+                } else {
+                    alert('⚠️ Vul alle verplichte velden in (Naam, E-mail en Bericht).');
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
