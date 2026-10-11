@@ -38,7 +38,7 @@
                                     <button class="qty-btn" data-action="plus" aria-label="Meer">+</button>
                                 </div>
 
-                                <button class="btn-order" data-add="1">
+                                <button class="btn-order" data-add="{{ product_id }}">
                                     <svg class="cart-svg" viewBox="0 0 24 24">
                                         <circle cx="9" cy="21" r="1"></circle>
                                         <circle cx="20" cy="21" r="1"></circle>
@@ -55,7 +55,7 @@
 
             </div>
 
-            <div class="cart-summary">
+            {{! <div class="cart-summary">
                 <div class="cart-header">
                     <span class="left">
                         <svg viewBox="0 0 24 24">
@@ -84,8 +84,8 @@
                         <span class="total-price" id="cartTotal">€0,00</span>
                     </div>
                 </div>
-                
-            </div>
+
+            </div> }}
         </div>
     </section>
 
@@ -173,15 +173,16 @@
             }
         }
 
-        // Badge in navbar (op elke pagina)
-        if (cartCountEl) cartCountEl.textContent = totalItems;
+        /* ---------- Badge in navbar wordt NIET hier bijgewerkt ----------
+        Dat doet cart-badge.js via het 'cartUpdated'-event.
+        Zo blijft er één systeem verantwoordelijk voor de badge. */
 
-        // Label in cart-summary
+        /* ---------- Label in cart-summary ---------- */
         if (cartCountLabel) {
             cartCountLabel.textContent = totalItems + (totalItems === 1 ? ' item' : ' items');
         }
 
-        // Lijst met items
+        /* ---------- Lijst met items ---------- */
         if (cartItemsList) {
             if (itemsArray.length === 0) {
                 cartItemsList.innerHTML = '<li class="empty-cart">Nog geen broodjes gekozen</li>';
@@ -198,15 +199,16 @@
             }
         }
 
-        // Totaal
+        /* ---------- Totaal ---------- */
         if (cartTotalEl) cartTotalEl.textContent = formatPrice(totalPrice);
     }
-
+    
     /* ---------- Cart mutaties ---------- */
     function setCart(newCart) {
         cart = newCart;
         saveCart(cart);     // ← elke wijziging direct opslaan
         updateUI();
+        window.dispatchEvent(new Event('cartUpdated'));   // ← signaal naar cart-badge.js
     }
 
     function addToCart(productId, qty) {

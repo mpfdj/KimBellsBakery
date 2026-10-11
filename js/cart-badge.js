@@ -2,6 +2,12 @@
 // Leest de winkelwagen uit localStorage en werkt de badge in de navbar bij.
 // Wordt op ELKE pagina geladen, zodat de teller altijd klopt.
 
+
+console.log('cart-badge.js is geladen');   // ← helemaal bovenaan het bestand
+
+
+
+
 (function () {
     const STORAGE_KEY = 'kimBelsCart';
 
@@ -33,11 +39,27 @@
     /**
      * Werkt de badge in de navbar bij.
      */
-    function updateCartBadge() {
-        const badge = document.getElementById('cart-count');
-        if (!badge) return;
-        badge.textContent = getCartItemCount();
-    }
+function updateCartBadge() {
+    console.log('updateCartBadge aangeroepen');
+
+    const badge = document.getElementById('cart-count');
+    if (!badge) return;
+
+    const count = getCartItemCount();
+    console.log('Cart count:', count);
+
+    badge.textContent = count;
+    badge.dataset.count = count;
+
+    badge.style.display = count > 0 ? 'inline-flex' : 'none';
+}
+
+    // function updateCartBadge() {
+    //     const badge = document.getElementById('cart-count');
+    //     if (!badge) return;
+    //     badge.textContent = getCartItemCount();
+    // }
+
 
     // 1) Bij het laden van de pagina
     document.addEventListener('DOMContentLoaded', updateCartBadge);
@@ -49,4 +71,8 @@
 
     // 3) Ook als je via back/forward terugkomt op deze pagina
     window.addEventListener('pageshow', updateCartBadge);
+
+// 4) Reageer op wijzigingen die het inline script doet
+window.addEventListener('cartUpdated', updateCartBadge);
+
 })();

@@ -34,3 +34,9 @@
   font-weight: bold;
   padding: 0 0.3rem;
 }
+
+/* Verberg de teller als er 0 items in de winkelwagen zitten */
+.cart-icon .count[data-count="0"] {
+  /* display: none !important; */
+  display: none;
+}
