@@ -26,3 +26,5 @@ https://manilabakeryamsterdam.nl/
 
 # html template engine
 Mustache
+
+composer require mustache/mustache
