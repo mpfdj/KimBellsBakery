@@ -16,3 +16,8 @@ https://github.com/abdulsamadayoade/Bakery
 
 # Icoontje
 https://thenounproject.com/icon/baking-3776517/
+
+
+
+# Voorbeelden
+https://manilabakeryamsterdam.nl/

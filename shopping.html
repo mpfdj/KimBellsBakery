@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KimBel's bakery</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/shopping.css">
+  <link rel="stylesheet" href="css/footer.css">
+
+  <!-- Standaard favicon voor moderne browsers -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+  <!-- Fallback voor oudere browsers -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Javascript -->
+  <script src="js/hamburger-menu.js" defer></script>
+  <script src="js/mail.js" defer></script>
+
+</head>
+
+<body>
+
+<!-- Navigatiebalk -->
+<nav class="navbar">
+    <a href="index.html" class="logo">
+        <img src="images/icon-transp.png" alt="KimBel's bakery icon" class="icon">
+        KimBel's <span>bakery</span>
+    </a>
+
+    <!-- Wrapper voor cart + hamburger -->
+    <div class="nav-actions">
+
+        <!-- Cart icon -->
+        <div class="cart-icon">
+            <svg viewBox="0 0 24 24">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="count" id="cart-count">0</span>
+        </div>
+
+        <!-- Hamburger knop -->
+        <button class="hamburger" id="hamburger" aria-label="Menu openen/sluiten">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+</nav>
+
+  <!-- Menu items -->
+  <div class="nav-menu" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="shopping.html">Bestellen</a>
+    <a href="about.html">Over mij</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+
+
+  <section class="shopping">
+    <div class="container">
+      <h1>Bestellen</h1>
+
+      <div class="product-grid" id="productGrid">
+        <!-- Product 1 -->
+        <div class="product-card" data-id="1">
+          <div class="product-img">
+            <img src="images/products/spanish-bread.webp" alt="Spanish bread"
+              onerror="this.style.display='none'; this.parentNode.querySelector('.img-fallback').style.display='flex';">
+            <div class="img-fallback" style="display:none;">🥖</div>
+          </div>
+          <div class="product-info">
+            <div>
+              <div class="product-title">Pandesal klassiek</div>
+              <div class="product-desc">1 stuks</div>
+            </div>
+            <div class="price-order-row">
+              <div class="price">€2,50</div>
+
+              <div class="actions-right">        
+                <div class="qty-wrap">
+                  <button class="qty-btn" data-action="minus" aria-label="Minder">−</button>
+                  <input type="number" class="qty-input" value="1" min="1" max="99" inputmode="numeric">
+                  <button class="qty-btn" data-action="plus" aria-label="Meer">+</button>
+                </div>
+
+                <button class="btn-order" data-add="1" aria-label="Bestel Pandesal klassiek">
+                  <svg class="cart-svg" viewBox="0 0 24 24">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  <span class="plus-badge">+</span>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+
+        <div class="cart-summary">
+          <div class="cart-header">
+            <span class="left">
+              <svg viewBox="0 0 24 24">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              Jouw bestelling
+            </span>
+            <span id="cartCountLabel" style="font-size:0.85rem; font-weight:500; color:#8b7a6c;">0 items</span>
+          </div>
+          <ul class="cart-items" id="cartItemsList">
+            <li class="empty-cart">Nog geen broodjes gekozen</li>
+          </ul>
+          <div class="cart-total">
+            <span>Totaal</span>
+            <span class="total-price" id="cartTotal">€0,00</span>
+          </div>
+          <button class="btn-checkout" id="checkoutBtn">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            Afrekenen
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+    (function () {
+      const products = {
+        1: { name: 'Pandesal klassiek', price: 2.50 },
+        2: { name: 'Pandesal met roomboter', price: 3.20 },
+        3: { name: 'Pandesal met knoflook', price: 3.50 },
+        4: { name: 'Pandesal met kaas', price: 3.80 },
+        5: { name: 'Pandesal met ui', price: 3.30 }
+      };
+
+      let cart = {};
+
+      const cartCountEl = document.getElementById('cart-count');
+      const cartCountLabel = document.getElementById('cartCountLabel');
+      const cartItemsList = document.getElementById('cartItemsList');
+      const cartTotalEl = document.getElementById('cartTotal');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      function formatPrice(price) {
+        return '€' + price.toFixed(2).replace('.', ',');
+      }
+
+      function updateUI() {
+        let totalItems = 0;
+        let totalPrice = 0;
+        const itemsArray = [];
+
+        for (const [id, qty] of Object.entries(cart)) {
+          if (qty > 0) {
+            const product = products[id];
+            if (product) {
+              totalItems += qty;
+              totalPrice += product.price * qty;
+              itemsArray.push({
+                id: id,
+                name: product.name,
+                qty: qty,
+                subtotal: product.price * qty
+              });
+            }
+          }
+        }
+
+        cartCountEl.textContent = totalItems;
+        if (cartCountLabel) cartCountLabel.textContent = totalItems + (totalItems === 1 ? ' item' : ' items');
+
+        if (itemsArray.length === 0) {
+          cartItemsList.innerHTML = '<li class="empty-cart">Nog geen broodjes gekozen</li>';
+        } else {
+          let html = '';
+          itemsArray.forEach(item => {
+            html += `<li class="cart-item">
+              <span class="cart-item-name">${item.name} <span class="cart-item-qty">×${item.qty}</span></span>
+              <span class="cart-item-price">${formatPrice(item.subtotal)}</span>
+              <button class="cart-item-remove" data-remove="${item.id}" aria-label="Verwijder">✕</button>
+            </li>`;
+          });
+          cartItemsList.innerHTML = html;
+        }
+
+        cartTotalEl.textContent = formatPrice(totalPrice);
+      }
+
+      function addToCart(productId, qty) {
+        const id = String(productId);
+        if (!products[id]) return;
+        cart[id] = (cart[id] || 0) + qty;
+        updateUI();
+      }
+
+      function removeFromCart(productId) {
+        const id = String(productId);
+        if (cart[id]) {
+          delete cart[id];
+          updateUI();
+        }
+      }
+
+      // Aantal-knoppen (+ / −) en directe invoer
+      document.querySelectorAll('.qty-wrap').forEach(wrap => {
+        const input = wrap.querySelector('.qty-input');
+        const minus = wrap.querySelector('[data-action="minus"]');
+        const plus = wrap.querySelector('[data-action="plus"]');
+
+        minus.addEventListener('click', () => {
+          let val = parseInt(input.value, 10) || 1;
+          if (val > 1) input.value = val - 1;
+        });
+
+        plus.addEventListener('click', () => {
+          let val = parseInt(input.value, 10) || 1;
+          if (val < 99) input.value = val + 1;
+        });
+
+        input.addEventListener('input', () => {
+          let val = parseInt(input.value, 10);
+          if (isNaN(val) || val < 1) input.value = 1;
+          if (val > 99) input.value = 99;
+        });
+
+        input.addEventListener('blur', () => {
+          if (!input.value || parseInt(input.value, 10) < 1) input.value = 1;
+        });
+      });
+
+      // Bestelknoppen
+      document.querySelectorAll('.btn-order').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const productId = btn.getAttribute('data-add');
+          const card = btn.closest('.product-card');
+          const input = card.querySelector('.qty-input');
+          const qty = parseInt(input.value, 10) || 1;
+
+          addToCart(productId, qty);
+
+          // Reset aantal naar 1 en geef korte feedback
+          input.value = 1;
+          btn.style.background = '#7a3d1a';
+          setTimeout(() => { btn.style.background = ''; }, 200);
+        });
+      });
+
+      // Verwijderen uit winkelwagen (event delegation)
+      cartItemsList.addEventListener('click', (e) => {
+        const removeBtn = e.target.closest('[data-remove]');
+        if (removeBtn) {
+          removeFromCart(removeBtn.getAttribute('data-remove'));
+        }
+      });
+
+      // Afrekenen
+      checkoutBtn.addEventListener('click', () => {
+        let totalItems = 0;
+        for (const qty of Object.values(cart)) totalItems += qty;
+
+        if (totalItems === 0) {
+          alert('Voeg eerst wat broodjes toe aan je bestelling.');
+        } else {
+          alert(`Bedankt! Je bestelling van ${totalItems} broodjes is geplaatst. We gaan direct voor je bakken! 🥖`);
+          cart = {};
+          updateUI();
+        }
+      });
+
+      // Fallback voor afbeeldingen
+      document.querySelectorAll('.product-img img').forEach(img => {
+        img.addEventListener('error', function () {
+          this.style.display = 'none';
+          const fallback = this.parentNode.querySelector('.img-fallback');
+          if (fallback) fallback.style.display = 'flex';
+        });
+      });
+
+      updateUI();
+    })();
+  </script>
+</body>
+
+<footer>
+  <div class="container">
+    <p>© 2026 <a href="#">KimBel's bakery</a> - Gebakken met passie</p>
+  </div>
+</footer>
+
+</html>
