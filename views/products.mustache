@@ -2,136 +2,92 @@
 <html lang="nl">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KimBel's bakery</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/navigation.css">
-  <link rel="stylesheet" href="css/cart.css">
-  <link rel="stylesheet" href="css/products.css">
-  <link rel="stylesheet" href="css/footer.css">
-
-  <!-- Standaard favicon voor moderne browsers -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
-  <!-- Javascript -->
-  <script src="js/hamburger-menu.js" defer></script>
-  <script src="js/cart-badge.js" defer></script>
+    {{> header }}
+    <link rel="stylesheet" href="css/products.css">
 </head>
 
 <body>
 
-<!-- Navigatiebalk -->
-<nav class="navbar">
-    <a href="index.php" class="logo">
-        <img src="images/icon-transp.png" alt="KimBel's bakery icon" class="icon">
-        KimBel's <span>bakery</span>
-    </a>
+    {{> nav }}
 
-    <div class="nav-actions">
-        <div class="cart-icon">
-            <svg viewBox="0 0 24 24">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            <span class="count" id="cart-count">0</span>
-        </div>
+    <section class="products">
+        <div class="container">
+            <h1>Bestellen</h1>
 
-        <button class="hamburger" id="hamburger" aria-label="Menu openen/sluiten">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</nav>
+            <div class="product-grid" id="productGrid">
 
-<!-- Menu items -->
-<div class="nav-menu" id="navMenu">
-    <a href="index.php">Home</a>
-    <a href="products.html">Bestellen</a>
-    <a href="about.php">Over mij</a>
-    <a href="contact.php">Contact</a>
-</div>
-
-<section class="products">
-    <div class="container">
-        <h1>Bestellen</h1>
-
-        <div class="product-grid" id="productGrid">
-            <!-- Product 1 -->
-            <div class="product-card" data-id="1">
-                <div class="product-img">
-                    <img src="images/products/spanish-bread.webp" alt="Spanish bread"
-                        onerror="this.style.display='none'; this.parentNode.querySelector('.img-fallback').style.display='flex';">
-                    <div class="img-fallback" style="display:none;">🥖</div>
-                </div>
-                <div class="product-info">
-                    <div>
-                        <div class="product-title">Pandesal klassiek</div>
-                        <div class="product-desc">1 stuks</div>
+                {{#products }}
+                <div class="product-card" data-id="{{ product_id }}">
+                    <div class="product-img">
+                        <img src="images/products/{{image}}" alt="{{ product_title }}"
+                            onerror="this.style.display='none'; this.parentNode.querySelector('.img-fallback').style.display='flex';">
+                        <div class="img-fallback" style="display:none;">🥖</div>
                     </div>
-                    <div class="price-order-row">
-                        <div class="price">€2,50</div>
+                    <div class="product-info">
+                        <div>
+                            <div class="product-title">{{ product_title}}</div>
+                            <div class="product-desc">{{ product_desc }}</div>
+                        </div>
+                        <div class="price-order-row">
+                            <div class="price">{{ price }}</div>
 
-                        <div class="actions-right">
-                            <div class="qty-wrap">
-                                <button class="qty-btn" data-action="minus" aria-label="Minder">−</button>
-                                <input type="number" class="qty-input" value="1" min="1" max="99" inputmode="numeric">
-                                <button class="qty-btn" data-action="plus" aria-label="Meer">+</button>
+                            <div class="actions-right">
+                                <div class="qty-wrap">
+                                    <button class="qty-btn" data-action="minus" aria-label="Minder">−</button>
+                                    <input type="number" class="qty-input" value="1" min="1" max="99" inputmode="numeric">
+                                    <button class="qty-btn" data-action="plus" aria-label="Meer">+</button>
+                                </div>
+
+                                <button class="btn-order" data-add="1">
+                                    <svg class="cart-svg" viewBox="0 0 24 24">
+                                        <circle cx="9" cy="21" r="1"></circle>
+                                        <circle cx="20" cy="21" r="1"></circle>
+                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                    </svg>
+                                    <span class="plus-badge">+</span>
+                                </button>
                             </div>
 
-                            <button class="btn-order" data-add="1" aria-label="Bestel Pandesal klassiek">
-                                <svg class="cart-svg" viewBox="0 0 24 24">
-                                    <circle cx="9" cy="21" r="1"></circle>
-                                    <circle cx="20" cy="21" r="1"></circle>
-                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                                </svg>
-                                <span class="plus-badge">+</span>
-                            </button>
                         </div>
-
                     </div>
                 </div>
-            </div>
-        </div>
+                {{/products}}
 
-        <div class="cart-summary">
-            <div class="cart-header">
-                <span class="left">
+            </div>
+
+            <div class="cart-summary">
+                <div class="cart-header">
+                    <span class="left">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Jouw bestelling
+                    </span>
+                    <span id="cartCountLabel" style="font-size:0.85rem; font-weight:500; color:#8b7a6c;">0 items</span>
+                </div>
+                <ul class="cart-items" id="cartItemsList">
+                    <li class="empty-cart">Nog geen broodjes gekozen</li>
+                </ul>
+                <div class="cart-total">
+                    <span>Totaal</span>
+                    <span class="total-price" id="cartTotal">€0,00</span>
+                </div>
+                <button class="btn-checkout" id="checkoutBtn">
                     <svg viewBox="0 0 24 24">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
-                    Jouw bestelling
-                </span>
-                <span id="cartCountLabel" style="font-size:0.85rem; font-weight:500; color:#8b7a6c;">0 items</span>
+                    Afrekenen
+                </button>
             </div>
-            <ul class="cart-items" id="cartItemsList">
-                <li class="empty-cart">Nog geen broodjes gekozen</li>
-            </ul>
-            <div class="cart-total">
-                <span>Totaal</span>
-                <span class="total-price" id="cartTotal">€0,00</span>
-            </div>
-            <button class="btn-checkout" id="checkoutBtn">
-                <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-                Afrekenen
-            </button>
         </div>
-    </div>
-</section>
+    </section>
 
 <script>
 (function () {
     /* ---------- Configuratie ---------- */
+    /*
     const products = {
         1: { name: 'Pandesal klassiek', price: 2.50 },
         2: { name: 'Pandesal met roomboter', price: 3.20 },
@@ -139,7 +95,9 @@
         4: { name: 'Pandesal met kaas', price: 3.80 },
         5: { name: 'Pandesal met ui', price: 3.30 }
     };
-
+    */
+    
+    const products = {{{ js_products_json }}};
     const STORAGE_KEY = 'kimBelsCart';
 
     /* ---------- localStorage helpers ---------- */
@@ -354,12 +312,9 @@
     updateUI();
 })();
 </script>
+
 </body>
 
-<footer>
-  <div class="container">
-    <p>© 2026 <a href="#">KimBel's bakery</a> - Gebakken met passie</p>
-  </div>
-</footer>
+  {{> footer }}
 
 </html>

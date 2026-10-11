@@ -24,7 +24,12 @@ https://manilabakeryamsterdam.nl/
 
 
 
-# html template engine
-Mustache
-
+# Libraries
+composer require phpmailer/phpmailer
 composer require mustache/mustache
+composer require symfony/yaml
+
+
+
+# Todo
+- Hoe zorg je er voor dat de prijs niet wordt aangepast met javascript bij het bestellen
