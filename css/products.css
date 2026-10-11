@@ -1,9 +1,9 @@
-.shopping {
+.products {
   padding: 60px 20px;
   background-color: rgba(200, 122, 79, 0.2);
 }
 
-.shopping h1 {
+.products h1 {
   font-family: var(--secondary-font);
   font-size: 5.5rem;
   font-weight: 900;
