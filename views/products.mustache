@@ -21,7 +21,7 @@
                     <div class="product-img">
                         <img src="images/products/{{image}}" alt="{{ product_title }}"
                             onerror="this.style.display='none'; this.parentNode.querySelector('.img-fallback').style.display='flex';">
-                        <div class="img-fallback" style="display:none;">🥖</div>
+                        <div class="img-fallback" style="display:none;">x</div>
                     </div>
                     <div class="product-info">
                         <div>
@@ -67,19 +67,24 @@
                     </span>
                     <span id="cartCountLabel" style="font-size:0.85rem; font-weight:500; color:#8b7a6c;">0 items</span>
                 </div>
+
                 <ul class="cart-items" id="cartItemsList">
                     <li class="empty-cart">Nog geen broodjes gekozen</li>
                 </ul>
-                <div class="cart-total">
-                    <span>Totaal</span>
-                    <span class="total-price" id="cartTotal">€0,00</span>
+
+                <!-- Totaal + knop op één rij -->
+                <div class="cart-total-row">
+                    <button class="btn-checkout" id="checkoutBtn" aria-label="Afrekenen">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    <div class="cart-total">
+                        <span>Totaal</span>
+                        <span class="total-price" id="cartTotal">€0,00</span>
+                    </div>
                 </div>
-                <button class="btn-checkout" id="checkoutBtn">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                    Afrekenen
-                </button>
+                
             </div>
         </div>
     </section>

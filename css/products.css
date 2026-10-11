@@ -11,7 +11,6 @@
   letter-spacing: .5rem;
   margin-right: -.5rem;
   margin-bottom: 60px;
-  /* 4x <br> = ongeveer 60-80px */
 }
 
 .product-grid {
@@ -102,9 +101,7 @@
 }
 
 .price {
-  /* font-weight: 700; */
   font-size: 1.7rem;
-  /* color: #b45f2b; */
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -122,7 +119,6 @@
   align-items: center;
   border: 1px solid #e1cfbc;
   border-radius: 8px;
-  /* was: 30px */
   background: #fdf7f0;
   overflow: hidden;
   height: 34px;
@@ -334,36 +330,50 @@
   font-size: 0.9rem;
 }
 
-.cart-total {
+/* ---- AANGEPAST: totaal + afrekenknop op één rij ---- */
+.cart-total-row {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-weight: 700;
-  font-size: 1.2rem;
+  gap: 12px;
   padding-top: 0.6rem;
   border-top: 2px solid #f0e2d4;
 }
 
+.cart-total {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cart-total span:first-child {
+  font-size: 0.85rem;
+  color: #8b7a6c;
+  font-weight: 500;
+}
+
 .cart-total .total-price {
+  font-size: 1.2rem;
+  font-weight: 700;
   color: #b45f2b;
 }
 
+/* Ronde, compacte afrekenknop */
 .btn-checkout {
   background: #2e241e;
   color: white;
   border: none;
-  border-radius: 40px;
-  padding: 1rem;
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.3px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   cursor: pointer;
-  transition: background 0.15s;
-  width: 100%;
+  transition: background 0.15s, transform 0.1s;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .btn-checkout:hover {
@@ -371,7 +381,7 @@
 }
 
 .btn-checkout:active {
-  transform: scale(0.98);
+  transform: scale(0.92);
 }
 
 .btn-checkout svg {
