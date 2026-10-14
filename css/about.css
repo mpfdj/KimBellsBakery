@@ -3,12 +3,6 @@
     background-color: rgba(200, 122, 79, 0.2);
 }
 
-/* .about h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 30px;
-    text-align: center;
-} */
-
 .about h1 {
     font-family: var(--secondary-font);
     font-size: 5.5rem;

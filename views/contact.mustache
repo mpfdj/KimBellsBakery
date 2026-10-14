@@ -2,54 +2,13 @@
 <html lang="nl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KimBel's bakery</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/navigation.css">
+    {{> header }}
     <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/footer.css">
-
-    <!-- Standaard favicon voor moderne browsers -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-
-    <!-- Fallback voor oudere browsers -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
-    <!-- Javascript -->
-    <script src="js/hamburger-menu.js" defer></script>
-    <script src="js/mail.js" defer></script>
-
 </head>
 
 <body>
 
-    <!-- Navigatiebalk -->
-    <nav class="navbar">
-        <a href="index.html" class="logo">
-            <img src="images/icon-transp.png" alt="KimBel's bakery icon" class="icon">
-            KimBel's <span>bakery</span>
-        </a>
-
-        <!-- Hamburger knop -->
-        <button class="hamburger" id="hamburger" aria-label="Menu openen/sluiten">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
-
-    <!-- Menu items -->
-    <div class="nav-menu" id="navMenu">
-        <a href="index.html">Home</a>
-        <a href="#">Bestellen</a>
-        <a href="about.html">Over mij</a>
-        <a href="contact.html">Contact</a>
-    </div>
-
+    {{> nav }}
 
     <!-- Contact sectie -->
     <main>
@@ -174,10 +133,6 @@
 
 </body>
 
-<footer>
-    <div class="container">
-        <p>© 2026 <a href="#">KimBel's bakery</a> - Gebakken met passie</p>
-    </div>
-</footer>
+    {{> footer }}
 
 </html>

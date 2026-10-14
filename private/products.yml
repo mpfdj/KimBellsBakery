@@ -1,0 +1,25 @@
+---
+products:
+  - product_id: 1
+    product_title: Pandedo coco
+    product_desc: 5 stuks
+    price: €7,00
+    image: pande-coco.webp
+
+  - product_id: 2
+    product_title: Puto flan
+    product_desc: 8 stuks
+    price: €10,50
+    image: puto-flan.webp
+
+  - product_id: 3
+    product_title: Ube puto flan
+    product_desc: 8 stuks
+    price: €10,50
+    image: ube-puto-flan.webp
+
+  - product_id: 4
+    product_title: Spanish bread
+    product_desc: 10 stuks
+    price: €8,00
+    image: spanish-bread.webp

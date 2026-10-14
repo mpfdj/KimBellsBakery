@@ -12,6 +12,14 @@
 }
 
 
+/* Wrapper voor cart-icon + hamburger, rechts uitgelijnd */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
 /* Logo */
 .logo {
     font-size: 2.0rem;
