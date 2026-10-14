@@ -72,7 +72,8 @@ function updateCartBadge() {
     // 3) Ook als je via back/forward terugkomt op deze pagina
     window.addEventListener('pageshow', updateCartBadge);
 
-// 4) Reageer op wijzigingen die het inline script doet
-window.addEventListener('cartUpdated', updateCartBadge);
+    // 4) Reageer op wijzigingen die het inline script doet
+    window.addEventListener('cartUpdated', updateCartBadge);
+
 
 })();

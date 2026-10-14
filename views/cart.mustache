@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    {{> header }}
+    <link rel="stylesheet" href="css/cart-page.css">
+</head>
+<body>
+
+{{> nav }}
+
+<section class="checkout">
+    <div class="container">
+        <h1>Jouw bestelling</h1>
+
+        <div class="cart-summary-page">
+            <div class="cart-header">
+                <span class="left">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    Winkelmandje
+                </span>
+                <span id="cartCountLabel">0 items</span>
+            </div>
+
+            <ul class="cart-items" id="cartItemsList">
+                <li class="empty-cart">Nog geen broodjes gekozen</li>
+            </ul>
+
+            <div class="cart-total-row">
+                <div class="cart-total">
+                    <span>Totaal</span>
+                    <span class="total-price" id="cartTotal">0,00 €</span>
+                </div>
+                <button class="btn-checkout" id="checkoutBtn" aria-label="Afrekenen">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <p style="text-align:center; margin-top:1rem;">
+            <a href="products.php" style="color:#b45f2b; text-decoration:none; font-weight:600;">
+                ← Verder winkelen
+            </a>
+        </p>
+    </div>
+</section>
+
+<script>
+    window.products = {{{ js_products_json }}};
+</script>
+<script src="js/cart.js"></script>
+<script>
+    (function () {
+        const cartCountLabel = document.getElementById('cartCountLabel');
+        const cartItemsList = document.getElementById('cartItemsList');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        function formatPrice(price) {
+            return price.toFixed(2).replace('.', ',') + ' €';
+        }
+
+        function updateUI() {
+            const cart = window.Cart.getCart();
+            const products = window.products || {};
+
+            let totalItems = 0;
+            let totalPrice = 0;
+            const itemsArray = [];
+
+            for (const [id, qty] of Object.entries(cart)) {
+                if (qty > 0) {
+                    const product = products[id];
+                    if (product) {
+                        totalItems += qty;
+                        totalPrice += product.price * qty;
+                        itemsArray.push({
+                            id: id,
+                            name: product.name,
+                            qty: qty,
+                            subtotal: product.price * qty
+                        });
+                    }
+                }
+            }
+
+            if (cartCountLabel) {
+                cartCountLabel.textContent = totalItems + (totalItems === 1 ? ' item' : ' items');
+            }
+
+            if (cartItemsList) {
+                if (itemsArray.length === 0) {
+                    cartItemsList.innerHTML = '<li class="empty-cart">Nog geen broodjes gekozen</li>';
+                } else {
+                    let html = '';
+                    itemsArray.forEach(item => {
+                        html += `<li class="cart-item" data-id="${item.id}">
+                            <span class="cart-item-name">${item.name}</span>
+
+                            <div class="cart-item-qty-wrap">
+                                <button type="button" class="cart-item-qty-btn" data-qty-action="minus" aria-label="Minder">−</button>
+                                <input type="number" class="cart-item-qty-input" value="${item.qty}" min="1" max="99" inputmode="numeric">
+                                <button type="button" class="cart-item-qty-btn" data-qty-action="plus" aria-label="Meer">+</button>
+                            </div>
+
+                            <span class="cart-item-price">${formatPrice(item.subtotal)}</span>
+                            <button type="button" class="cart-item-remove" data-remove="${item.id}" aria-label="Verwijder">✕</button>
+                        </li>`;
+                    });
+                    cartItemsList.innerHTML = html;
+                }
+            }
+
+            if (cartTotalEl) cartTotalEl.textContent = formatPrice(totalPrice);
+        }
+
+        /* ---------- Centrale helper: qty aanpassen via bestaande API ---------- */
+        function setQty(id, qty) {
+            const newCart = window.Cart.getCart();
+            if (qty <= 0) {
+                delete newCart[id];
+            } else {
+                newCart[id] = Math.min(99, qty);
+            }
+            window.Cart.setCart(newCart);   // vuurt cartUpdated af → updateUI()
+        }
+
+        /* ---------- Klik op + / − / verwijder ---------- */
+        if (cartItemsList) {
+            cartItemsList.addEventListener('click', (e) => {
+                const qtyBtn = e.target.closest('[data-qty-action]');
+                if (qtyBtn) {
+                    e.preventDefault();
+                    const li = qtyBtn.closest('.cart-item');
+                    if (!li) return;
+                    const id = li.getAttribute('data-id');
+                    const input = li.querySelector('.cart-item-qty-input');
+                    let val = parseInt(input.value, 10) || 1;
+                    const action = qtyBtn.getAttribute('data-qty-action');
+
+                    if (action === 'minus' && val > 1) val -= 1;
+                    if (action === 'plus' && val < 99) val += 1;
+
+                    setQty(id, val);
+                    return;
+                }
+
+                const removeBtn = e.target.closest('[data-remove]');
+                if (removeBtn) {
+                    e.preventDefault();
+                    window.Cart.removeFromCart(removeBtn.getAttribute('data-remove'));
+                }
+            });
+
+            /* ---------- Direct typen in het invoerveld ---------- */
+            cartItemsList.addEventListener('input', (e) => {
+                const input = e.target.closest('.cart-item-qty-input');
+                if (!input) return;
+
+                let val = parseInt(input.value, 10);
+                if (isNaN(val) || val < 1) val = 1;
+                if (val > 99) val = 99;
+
+                const li = input.closest('.cart-item');
+                const id = li.getAttribute('data-id');
+                setQty(id, val);
+            });
+        }
+
+        /* ---------- Afrekenen ---------- */
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+                const cart = window.Cart.getCart();
+                let totalItems = 0;
+                for (const qty of Object.values(cart)) totalItems += qty;
+
+                if (totalItems === 0) {
+                    alert('Voeg eerst wat broodjes toe aan je bestelling.');
+                } else {
+                    alert(`Bedankt! Je bestelling van ${totalItems} broodjes is geplaatst. We gaan direct voor je bakken! 🥖`);
+                    window.Cart.clearCart();
+                }
+            });
+        }
+
+        window.addEventListener('cartUpdated', updateUI);
+        updateUI();
+    })();
+</script>
+
+</body>
+{{> footer }}
+</html>
