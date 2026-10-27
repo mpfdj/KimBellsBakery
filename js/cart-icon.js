@@ -1,15 +1,10 @@
-// js/cart-badge.js
+// js/cart-icon.js
 // Leest de winkelwagen uit localStorage en werkt de badge in de navbar bij.
 // Wordt op ELKE pagina geladen, zodat de teller altijd klopt.
 
 
-console.log('cart-badge.js is geladen');   // ← helemaal bovenaan het bestand
-
-
-
-
 (function () {
-    const STORAGE_KEY = 'kimBelsCart';
+    const STORAGE_KEY = 'KimBellsCart';
 
     /**
      * Telt het totaal aantal items in de opgeslagen winkelwagen.

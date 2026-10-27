@@ -1,6 +1,6 @@
 // js/cart.js
 (function () {
-    const STORAGE_KEY = 'kimBelsCart';
+    const STORAGE_KEY = 'KimBellsCart';
 
     /* ---------- localStorage helpers ---------- */
     function loadCart() {
