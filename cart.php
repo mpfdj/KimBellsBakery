@@ -10,7 +10,9 @@ $jsProducts = [];
 foreach ($data['products'] as $product) {
     $jsProducts[$product['product_id']] = [
         'name'  => $product['product_title'],
+        'unit'  => $product['product_unit'],
         'price' => (float) str_replace(['€', ','], ['', '.'], $product['price']),
+        'image'  => $product['image']
     ];
 }
 

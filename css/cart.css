@@ -95,7 +95,7 @@
 /* ---------- Individuele cart-regel: grid met vaste kolommen ---------- */
 .cart-summary-page .cart-item {
     display: grid;
-    grid-template-columns: 1fr 7.5rem 6rem 2.2rem; /* naam | aantal | prijs | verwijderen */
+    grid-template-columns: 6rem 1fr 7.5rem 6rem 2.2rem; /* image | naam | aantal | prijs | verwijderen */
     align-items: center;          /* verticaal gecentreerd */
     font-size: 1.7rem;
     color: #4a3b31;
@@ -197,8 +197,8 @@
     border: none;
     background: transparent;
     text-align: center;
-    font-size: 0.9rem;
-    font-weight: 700;
+/*    font-size: 0.9rem; */
+/*    font-weight: 700; */
     color: #2e241e;
     outline: none;
     -moz-appearance: textfield;
@@ -321,4 +321,16 @@
 .cart-summary-page .cart-items::-webkit-scrollbar-thumb {
     background: #d9c6b4;
     border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+.cart-item img {
+    width: 51.14px;
+    height: 51.14px;
 }

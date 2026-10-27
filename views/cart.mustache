@@ -26,13 +26,13 @@
             </div>
 
             <ul class="cart-items" id="cartItemsList">
-                <li class="empty-cart">Nog geen broodjes gekozen</li>
+                <li class="empty-cart">Jouw winkelmandje is leeg</li>
             </ul>
 
             <div class="cart-total-row">
                 <div class="cart-total">
                     <span>Totaal</span>
-                    <span class="total-price" id="cartTotal">0,00 €</span>
+                    <span class="total-price" id="cartTotal">€0,00</span>
                 </div>
                 <button class="btn-checkout" id="checkoutBtn" aria-label="Afrekenen">
                     <svg viewBox="0 0 24 24">
@@ -43,7 +43,7 @@
         </div>
 
         <p style="text-align:center; margin-top:1rem;">
-            <a href="products.php" style="color:#b45f2b; text-decoration:none; font-weight:600;">
+            <a href="products.php" style="color:#b45f2b; text-decoration:none; font-weight:700; font-size: 2rem;">
                 ← Verder winkelen
             </a>
         </p>
@@ -62,7 +62,7 @@
         const checkoutBtn = document.getElementById('checkoutBtn');
 
         function formatPrice(price) {
-            return price.toFixed(2).replace('.', ',') + ' €';
+            return '€' + price.toFixed(2).replace('.', ',');
         }
 
         function updateUI() {
@@ -81,7 +81,8 @@
                         totalPrice += product.price * qty;
                         itemsArray.push({
                             id: id,
-                            name: product.name,
+                            name: product.name + ' | ' + product.unit,
+                            image: product.image,
                             qty: qty,
                             subtotal: product.price * qty
                         });
@@ -95,11 +96,12 @@
 
             if (cartItemsList) {
                 if (itemsArray.length === 0) {
-                    cartItemsList.innerHTML = '<li class="empty-cart">Nog geen broodjes gekozen</li>';
+                    cartItemsList.innerHTML = '<li class="empty-cart">Jouw winkelmandje is leeg</li>';
                 } else {
                     let html = '';
                     itemsArray.forEach(item => {
                         html += `<li class="cart-item" data-id="${item.id}">
+                            <img src="images/products/${item.image}"/>
                             <span class="cart-item-name">${item.name}</span>
 
                             <div class="cart-item-qty-wrap">
@@ -180,9 +182,9 @@
                 for (const qty of Object.values(cart)) totalItems += qty;
 
                 if (totalItems === 0) {
-                    alert('Voeg eerst wat broodjes toe aan je bestelling.');
+                    alert('Jouw winkelmandje is leeg');
                 } else {
-                    alert(`Bedankt! Je bestelling van ${totalItems} broodjes is geplaatst. We gaan direct voor je bakken! 🥖`);
+                    alert('Bedankt! Je bestelling is geplaatst. We gaan direct voor je bakken!');
                     window.Cart.clearCart();
                 }
             });
