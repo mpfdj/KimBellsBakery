@@ -1,4 +1,11 @@
 /* ===== CONTACT SECTION ===== */
+
+/* override container */
+.container {
+    max-width: 800px;
+    width: 100%;
+}
+
 .contact-section {
     padding: 60px 0 80px;
     background-color: rgba(200, 122, 79, 0.2);
@@ -193,3 +200,56 @@
 .form-group select option:first-child {
     color: #999;
 }
+
+
+
+
+
+
+
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: none;
+    font-size: 18px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+/* ===== HONEYPOT STYLING ===== */
+/* Verberg het honeypot veld voor echte gebruikers */
+.honeypot {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Of gebruik deze methode (display: none werkt ook, maar sommige bots zien dit) */
+/*
+.honeypot {
+    display: none;
+}
+*/
+
+.honeypot label {
+    display: none; /* Verborgen voor echte gebruikers */
+ }
