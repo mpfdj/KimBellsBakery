@@ -10,126 +10,98 @@
 
     {{> nav }}
 
-    <!-- Contact sectie -->
-    <main>
-        <section class="contact-section">
-            <div class="container">
-                
-                <h1>Contact</h1>
-                <p class="subtitle">Heb je vragen, een speciale bestelling of wil je iets anders weten? Ik hoor het
-                    graag!</p>
+    <section class="contact-section">
+        <div class="container">
+            
+            <h1>Contact</h1>
+            <p class="subtitle">Heb je vragen, een speciale bestelling of wil je iets anders weten? Ik hoor het graag!</p>
 
-                <div class="contact-form">
-                    <h2>Stuur een bericht</h2>
-                    <form id="contactForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Naam</label>
-                                <input type="text" id="name" placeholder="Jouw naam" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">E-mail</label>
-                                <input type="email" id="email" placeholder="Jouw e-mail" required>
-                            </div>
-                        </div>
+            <!-- Bericht weergave -->
+            <div id="alert" class="alert"></div>
 
+
+            <div class="contact-form">
+                <h2>Stuur een bericht</h2>
+                <form id="contactForm" action="http://localhost:8080/KimBellsBakery/send_message.php" method="POST">
+
+                    <div class="honeypot">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" placeholder="Laat dit veld leeg" tabindex="-1" autocomplete="off">
+                        <p style="color: #999; font-size: 12px;">Laat dit veld leeg</p>
+                    </div>
+
+                    <div class="honeypot">
+                        <label>
+                            <input type="checkbox" name="newsletter" value="1">
+                            Schrijf mij in voor de nieuwsbrief (optioneel)
+                        </label>
+                    </div>
+
+                    <input type="hidden" name="form_timestamp" id="form_timestamp" value="">
+
+                    <script>
+                        document.getElementById('form_timestamp').value = Math.floor(Date.now() / 1000);
+                    </script>
+
+
+
+                    <div class="form-row">
                         <div class="form-group">
-                            <label for="subject">Onderwerp *</label>
-                            <select id="subject" required>
-                                <option value="">Kies een onderwerp...</option>
-                                <option value="bestelling">Bestelling</option>
-                                <option value="trouwtaart">Taart</option>
-                                <option value="allergie">Allergie</option>
-                                <option value="feedback">Feedback</option>
-                                <option value="overig">Overig</option>
-                            </select>
+                            <label for="name">Naam</label>
+                            <input type="text" id="name" placeholder="Jouw naam" required>
                         </div>
-
                         <div class="form-group">
-                            <label for="message">Bericht *</label>
-                            <textarea id="message" placeholder="Waarmee kunnen we je helpen?" required></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-submit">Verstuur bericht</button>
-                    </form>
-                </div>
-
-
-
-                <!-- ===== CONTACTGEGEVENS ===== -->
-                <div class="contact-info">
-                    <h2>Contactgegevens</h2>
-
-                    <div class="info-item">
-                        <span class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                stroke="#c87a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0z"
-                                    fill="#c87a4f"></path>
-                                <circle cx="12" cy="10" r="3" fill="white"></circle>
-                            </svg>
-                        </span>
-                        <div class="text">
-                            <strong>Adres</strong>
-                            Griend 24 25<br>
-                            8225RZ Lelystad
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" placeholder="Jouw e-mail" required>
                         </div>
                     </div>
 
-                    <div class="info-item">
-                        <span class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                stroke="#c87a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                                    fill="#c87a4f"></path>
-                            </svg>
-                        </span>
-                        <div class="text">
-                            <strong>Telefoon</strong>
-                            <a href="tel:+31617828022">06 178 280 22</a>
-                        </div>
+                    <div class="form-group">
+                        <label for="subject">Onderwerp *</label>
+                        <select id="subject" required>
+                            <option value="">Kies een onderwerp...</option>
+                            <option value="bestelling">Bestelling</option>
+                            <option value="trouwtaart">Taart</option>
+                            <option value="allergie">Allergie</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="overig">Overig</option>
+                        </select>
                     </div>
 
-                    <div class="info-item">
-                        <span class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                stroke="#c87a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect width="20" height="16" x="2" y="4" rx="2" fill="#c87a4f"></rect>
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" fill="white"></path>
-                            </svg>
-                        </span>
-                        <div class="text">
-                            <strong>E-mail</strong>
-                            <a href="mailto:efrilb@gmail.com">efrilb@gmail.com</a>
-                        </div>
+                    <div class="form-group">
+                        <label for="message">Bericht *</label>
+                        <textarea id="message" placeholder="Waarmee kunnen we je helpen?" required></textarea>
                     </div>
 
-                    <div class="info-item">
-                        <span class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                stroke="#c87a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" fill="#c87a4f"></path>
-                            </svg>
-                        </span>
-                        <div class="text">
-                            <strong>WhatsApp</strong>
-                            <a href="https://wa.me/31617828022">06 178280 22</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ===== GOOGLE MAPS ===== -->
-                <div class="map-section">
-                    <iframe src="https://www.google.com/maps?q=Griend+24+25+8225RZ+Lelystad&output=embed"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-
+                    <button type="submit" class="btn-submit">Verstuur bericht</button>
+                </form>
             </div>
-        </section>
-    </main>
+
+        </div>
+    </section>
+
+
+    <script>
+        // Toon eventuele berichten van de URL parameters
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const message = urlParams.get('message');
+            const alertDiv = document.getElementById('alert');
+
+            if (status && message) {
+                alertDiv.className = 'alert alert-' + status;
+                alertDiv.textContent = decodeURIComponent(message);
+                alertDiv.style.display = 'block';
+
+                // Verwijder de parameters uit de URL zonder de pagina te herladen
+                if (window.history && window.history.replaceState) {
+                    const newUrl = window.location.pathname + window.location.hash;
+                    window.history.replaceState({}, document.title, newUrl);
+                }
+            }
+        });
+    </script>
 
 </body>
 
