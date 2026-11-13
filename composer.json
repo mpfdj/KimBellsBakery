@@ -1,6 +1,7 @@
 {
     "require": {
         "mustache/mustache": "^3.2",
-        "symfony/yaml": "^7.4"
+        "symfony/yaml": "^7.4",
+        "phpmailer/phpmailer": "^7.2"
     }
 }

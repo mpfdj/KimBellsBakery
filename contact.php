@@ -1,4 +1,6 @@
 <?php
+require_once 'load_env.php';
+
 require 'vendor/autoload.php';
 
 $mainLoader = new Mustache_Loader_FilesystemLoader(__DIR__ . '/views');
